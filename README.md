@@ -1,9 +1,9 @@
-# Java Full Stack Web Development Internship – Task 2
+# Java Full Stack Web Development Internship – Task 3
 
-## Database Storage with Spring Data JPA & MySQL
+## Database Storage & Contact Management Dashboard
 
 ### Project Overview
-This project connects the landing page and contact form from Task 1 to a relational database using **Spring Data JPA**. Submitted messages are stored in a `contacts` table in a local **MySQL** database. Additionally, it provides a JSON endpoint to retrieve all stored submissions.
+This project connects the landing page and contact form to a relational database using **Spring Data JPA**. Submitted messages are stored in a local **MySQL** database. Additionally, it implements a secure, visually stunning **Contact Management Dashboard** allowing admins to view, search, and manage submissions in real time.
 
 ---
 

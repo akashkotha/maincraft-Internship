@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Dashboard | Maincrafts Technology</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+    <!-- Ambient Gradient Background -->
+    <div class="gradient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="/" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-cubes"></i></span>
+                <span class="logo-text">Maincrafts</span>
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="/#home" class="nav-link">Home</a></li>
+                    <li><a href="/#features" class="nav-link">Features</a></li>
+                    <li><a href="/#about" class="nav-link">About</a></li>
+                    <li><a href="/#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-cta">
+                <a href="/" class="btn btn-sm btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Site</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="container">
+        <section class="dashboard-section">
+            
+            <div class="dashboard-header">
+                <div class="dashboard-title-area">
+                    <span class="section-tag">Admin Panel</span>
+                    <h1 class="gradient-text">Contact Messages</h1>
+                    <p style="color: hsl(var(--text-muted)); font-size: 0.95rem;">Manage and review feedback submissions from the contact form.</p>
+                </div>
+                <a href="/" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> New Message</a>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="statTotal">0</span>
+                        <span class="stat-label">Total Submissions</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon teal">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="statUnique">0</span>
+                        <span class="stat-label">Unique Contacts</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Bar -->
+            <div class="control-panel">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search by name, email, or message keyword...">
+                </div>
+                <div class="action-buttons">
+                    <button id="refreshBtn" class="btn btn-outline btn-sm">
+                        <i class="fa-solid fa-rotate-right"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="contacts-table">
+                        <thead>
+                            <tr>
+                                <th class="col-id">ID</th>
+                                <th class="col-name">Name</th>
+                                <th class="col-email">Email</th>
+                                <th class="col-message">Message</th>
+                                <th class="col-actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Loading Spinner -->
+                <div id="tableLoading" class="table-loading">
+                    <i class="fa-solid fa-spinner spinner"></i>
+                    <span>Loading messages from database...</span>
+                </div>
+
+                <!-- Empty State -->
+                <div id="tableEmpty" class="empty-state" style="display: none;">
+                    <div class="empty-icon"><i class="fa-regular fa-folder-open"></i></div>
+                    <div class="empty-text">No messages found</div>
+                    <p style="color: hsl(var(--text-muted)); font-size: 0.85rem;">Submissions from the landing page will appear here.</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="copyright">&copy; 2026 Maincrafts Technology. All Rights Reserved. Java Full Stack Internship.</p>
+            <div class="footer-links">
+                <a href="/#home">Back to Top</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Message Detail Modal -->
+    <div id="detailModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Message Details</h3>
+                <button id="modalCloseBtn" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-field">
+                    <span class="modal-label">Submission ID</span>
+                    <span class="modal-value" id="modalId">#1</span>
+                </div>
+                <div class="modal-field">
+                    <span class="modal-label">Sender Name</span>
+                    <span class="modal-value" id="modalName">Name</span>
+                </div>
+                <div class="modal-field">
+                    <span class="modal-label">Email Address</span>
+                    <span class="modal-value" id="modalEmail">Email</span>
+                </div>
+                <div class="modal-field">
+                    <span class="modal-label">Message Content</span>
+                    <div class="modal-message-box" id="modalMessage">Message</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let allContacts = [];
+            const searchInput = document.getElementById('searchInput');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const tableBody = document.getElementById('contactTableBody');
+            const tableLoading = document.getElementById('tableLoading');
+            const tableEmpty = document.getElementById('tableEmpty');
+            
+            const statTotal = document.getElementById('statTotal');
+            const statUnique = document.getElementById('statUnique');
+
+            // Modal elements
+            const detailModal = document.getElementById('detailModal');
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+            const modalId = document.getElementById('modalId');
+            const modalName = document.getElementById('modalName');
+            const modalEmail = document.getElementById('modalEmail');
+            const modalMessage = document.getElementById('modalMessage');
+
+            // Fetch contacts from REST API
+            async function loadContacts() {
+                tableLoading.style.display = 'flex';
+                tableEmpty.style.display = 'none';
+                tableBody.innerHTML = '';
+                
+                try {
+                    // Using relative path so it works on whatever port the app runs on (e.g. 8081)
+                    const response = await fetch('/contacts');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    allContacts = await response.json();
+                    
+                    updateStats();
+                    renderTable(allContacts);
+                } catch (err) {
+                    console.error('Error fetching contacts:', err);
+                    tableLoading.style.display = 'none';
+                    tableEmpty.style.display = 'flex';
+                    tableEmpty.querySelector('.empty-text').innerText = 'Failed to load data';
+                    tableEmpty.querySelector('p').innerText = 'Verify the Spring Boot backend server is running.';
+                }
+            }
+
+            // Update stats panel
+            function updateStats() {
+                statTotal.innerText = allContacts.length;
+                
+                const uniqueEmails = new Set(allContacts.map(c => c.email.toLowerCase()));
+                statUnique.innerText = uniqueEmails.size;
+            }
+
+            // Render table rows
+            function renderTable(contacts) {
+                tableLoading.style.display = 'none';
+                
+                if (contacts.length === 0) {
+                    tableEmpty.style.display = 'flex';
+                    return;
+                }
+                
+                tableEmpty.style.display = 'none';
+                tableBody.innerHTML = '';
+
+                contacts.forEach((contact, idx) => {
+                    const row = document.createElement('tr');
+                    row.className = 'fade-in-row';
+                    row.style.animationDelay = `${idx * 0.05}s`;
+                    
+                    // Escaping helper
+                    const escape = (str) => str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+                    row.innerHTML = `
+                        <td class="col-id">#${contact.id}</td>
+                        <td class="col-name">${escape(contact.name)}</td>
+                        <td class="col-email">${escape(contact.email)}</td>
+                        <td class="col-message">${escape(contact.message)}</td>
+                        <td class="col-actions">
+                            <button class="btn-icon view-btn" data-id="${contact.id}" title="View Details">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    // Bind modal view event
+                    row.querySelector('.view-btn').addEventListener('click', () => openModal(contact));
+                    
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // Search filter functionality
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                if (!query) {
+                    renderTable(allContacts);
+                    return;
+                }
+
+                const filtered = allContacts.filter(c => 
+                    c.name.toLowerCase().includes(query) || 
+                    c.email.toLowerCase().includes(query) || 
+                    c.message.toLowerCase().includes(query)
+                );
+
+                renderTable(filtered);
+            });
+
+            // Refresh button click
+            refreshBtn.addEventListener('click', () => {
+                const icon = refreshBtn.querySelector('i');
+                icon.className = 'fa-solid fa-rotate-right fa-spin';
+                loadContacts().finally(() => {
+                    setTimeout(() => {
+                        icon.className = 'fa-solid fa-rotate-right';
+                    }, 500);
+                });
+            });
+
+            // Modal operations
+            function openModal(contact) {
+                modalId.innerText = `#${contact.id}`;
+                modalName.innerText = contact.name;
+                modalEmail.innerText = contact.email;
+                modalMessage.innerText = contact.message;
+                
+                detailModal.classList.add('open');
+            }
+
+            function closeModal() {
+                detailModal.classList.remove('open');
+            }
+
+            modalCloseBtn.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside card
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) {
+                    closeModal();
+                }
+            });
+
+            // Load on init
+            loadContacts();
+        });
+    </script>
+</body>
+</html>
