@@ -389,6 +389,45 @@
     animation: fadeInUp 0.4s ease forwards;
 }
 
+/* Individual Delete Button */
+.btn-icon.delete-btn {
+    background: hsla(var(--danger) / 0.1);
+    border: 1px solid hsla(var(--danger) / 0.3);
+    color: hsl(var(--danger));
+}
+
+.btn-icon.delete-btn:hover {
+    background: hsl(var(--danger));
+    color: white;
+    box-shadow: 0 4px 12px hsla(var(--danger) / 0.4);
+    transform: translateY(-2px);
+}
+
+/* Danger Button (e.g. Clear All) */
+.btn-danger {
+    background: hsla(var(--danger) / 0.1);
+    border: 1px solid hsla(var(--danger) / 0.3);
+    color: hsl(var(--danger));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-danger:hover {
+    background: hsl(var(--danger));
+    color: white;
+    box-shadow: 0 4px 12px hsla(var(--danger) / 0.4);
+    transform: translateY(-2px);
+}
+
 /* Responsive Table Design adjustments */
 @media (max-width: 768px) {
     .dashboard-header {

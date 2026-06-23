@@ -5,6 +5,15 @@
 ### Project Overview
 This project connects the landing page and contact form to a relational database using **Spring Data JPA**. Submitted messages are stored in a local **MySQL** database. Additionally, it implements a secure, visually stunning **Contact Management Dashboard** allowing admins to view, search, and manage submissions in real time.
 
+### Dashboard Features
+- **Real-Time Submissions**: Contact submissions appear in the dashboard automatically.
+- **Search & Filtering**: Search and filter contact submissions by name, email, or message keyword.
+- **Detailed View**: Interactive modal popups to view individual messages in detail.
+- **Delete Submission**: Ability to safely remove specific messages from the database.
+- **Clear Database**: Quick reset/wipe functionality to delete all contact messages (with confirmation).
+- **Export to CSV**: Client-side utility to backup and download all records in standard CSV format.
+- **Glassmorphic UI**: High-end styling using CSS backdrop filters, radial gradients, animations, and toast alerts.
+
 ---
 
 ## Technical Stack
@@ -80,6 +89,16 @@ If you don't have MySQL running, you can test the application using the built-in
     }
   ]
   ```
+
+### 4. Delete a Message
+* **URL**: `/contacts/{id}`
+* **Method**: `DELETE`
+* **Description**: Deletes a specific contact submission by ID.
+
+### 5. Clear All Messages
+* **URL**: `/contacts`
+* **Method**: `DELETE`
+* **Description**: Deletes all contact submissions in the database.
 
 ---
 
